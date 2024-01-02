@@ -1,0 +1,21 @@
+# Node.js related
+node_modules/
+
+# Compiled TypeScript
+dist/
+*.js
+*.js.map
+*.d.ts
+
+# Dependency directories
+lib/
+vendor/
+typings/
+
+# IDE and editor files
+.vscode/
+.idea/
+
+# Miscellaneous
+.DS_Store
+.env

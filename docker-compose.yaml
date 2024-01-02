@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: mongo-ts
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: niggly
+      MONGO_INITDB_ROOT_PASSWORD: balls
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db 
