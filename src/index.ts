@@ -7,6 +7,7 @@ import compression from 'compression';
 import cors from 'cors';
 // import modules for mongo database
 import mongoose from 'mongoose';
+import router from './router';
 // Create an instance of the Express application
 const app = express();
 
@@ -35,3 +36,5 @@ const MONGO_URL = 'mongodb://niggly:balls@localhost:27017';
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
 mongoose.connection.on('error', (error: Error) => console.log(error));
+
+app.use('/', router());

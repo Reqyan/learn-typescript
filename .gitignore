@@ -19,3 +19,5 @@ typings/
 # Miscellaneous
 .DS_Store
 .env
+
+data/
