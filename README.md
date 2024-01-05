@@ -2,6 +2,7 @@
 Learn Typescript 
 
 https://www.youtube.com/watch?v=b8ZUb_Okxro&ab_channel=CodeWithAntonio
+
 Notes for Step-by-step : 
 1. npm init -y
 2. npm install -D typescript
@@ -12,3 +13,5 @@ Notes for Step-by-step :
 7. npm i @types/express @types/body-parser @types/cookie-parser @types/compression @types/cors
 8. npm install mongoose #install it after done the init for mongodb
 9. npm i -D @types/mongoose
+10. npm i lodash
+11. npm i -D  @types/lodash

@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/lodash": "^4.14.202",
     "@types/mongoose": "^5.11.97",
     "nodemon": "^3.0.2",
     "ts-node": "^10.9.2",
@@ -27,6 +28,8 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "iodash": "^0.0.1-security",
+    "lodash": "^4.17.21",
     "mongoose": "^8.0.3"
   }
 }
