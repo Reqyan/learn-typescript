@@ -1,9 +1,12 @@
 import express from "express";
-
+import { random, authentication } from "../helpers";
 import { deleteUserById, getUserById, getUsers } from "../db/users";
 
 // Get All Users
-export const getAllUsers = async ( req: express.Request, res: express.Response ) => {
+export const getAllUsers = async (
+  req: express.Request,
+  res: express.Response
+) => {
   try {
     const users = await getUsers();
 
@@ -15,37 +18,49 @@ export const getAllUsers = async ( req: express.Request, res: express.Response )
 };
 
 // Delete User
-export const deleteUser = async (req: express.Request, res: express.Response) => {
-    try {
-        const { id } = req.params;
+export const deleteUser = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const { id } = req.params;
 
-        const deleteUser = await deleteUserById(id);
-        return res.json(deleteUser);
-    } catch (error) {
-        console.log(error);
-        return res.sendStatus(400);
-    }
-}
+    const deleteUser = await deleteUserById(id);
+    return res.json(deleteUser);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
+};
 
 // Update User
-export const updateUser = async (req: express.Request, res: express.Response) => {
-    try {
-        const { id } = req.params;
-        const { username } = req.body;
+export const updateUser = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const { id } = req.params;
+    const { username, password } = req.body;
 
-        if (!username) {
-            return res.sendStatus(400);
-        }
+    const user = await getUserById(id);
 
-        const user = await getUserById(id);
-
-        user.username = username;
-        await user.save();
-
-        return res.status(200).json(user).end();
-    } catch(error) {
-        console.log(error);
-        return res.sendStatus(400);
+    // Update username only if provided in the request body
+    if (username) {
+      user.username = username;
     }
 
-}
+    // Update password only if provided in the request body
+    const salt = random();
+    if (password) {
+      user.authentication.salt = salt;
+      user.authentication.password = authentication(salt, password);
+    } 
+
+    await user.save();
+
+    return res.status(200).json(user).end();
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ error: "Failed to update user" });
+  }
+};
